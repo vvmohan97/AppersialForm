@@ -1,0 +1,18 @@
+
+.span{
+  color:red;
+} 
+.toastify{
+  background-color: red;
+}
+.loginimg{
+  height: 600px;
+  width:600px ;
+  /* margin-top: 30px; */
+}
+.heading-appraisal{
+  margin-left: 95px;
+  margin-top: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
