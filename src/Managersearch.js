@@ -1,6 +1,7 @@
-import { Avatar, Card, Grid, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Card, Grid, Menu, MenuItem, Select } from "@mui/material";
+import axios from "axios";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from './skein_logo1.png';
 
@@ -11,8 +12,42 @@ import logo from './skein_logo1.png';
 
 export function Managersearch(){
 
+
+
+
+const [search,setSearch]=useState()
 const navigates=useNavigate();
 const [logout,setLogout]= useState()
+const [searchList,setSearchList]=useState([])
+const [searchValue , setSearchValue] = useState('');
+
+// const handleChange=(e)=>{
+//     setSearch(e.target);
+
+// }
+const selectedemail = localStorage.setItem("selected", search)
+console.log(selectedemail);
+const handlesearchsubmit=(e)=>{
+    navigates("/manager")
+    axios.get(`http://demo.emeetify.com:5052/appraisel/users/userNames?email=${selectedemail}`)
+    .then((response)=>{
+        console.log(response.data);
+    }).catch("error")
+    
+
+}
+
+useEffect( () =>{
+    axios.get('http://demo.emeetify.com:5052/appraisel/users/userList')
+    .then((response)=>{
+        console.log(response.data.data[0].email,"data");
+        setSearchList(response?.data?.data)
+        for(let i = 0 ; i<response.data.data.length ;i++){
+            console.log(response.data.data[i].email,"one");
+           
+        }
+    }).catch("error")
+},[]);
 const handleLogout = (e) => {
     e.preventDefault();
     setLogout(e.target.value)
@@ -51,11 +86,29 @@ const handleLogout = (e) => {
     </div>
   </Grid>
  </Grid>
+<Card style={{marginTop:"150px",marginLeft:"380px",height:"150px",width:"400px",alignItems:"center"}}> 
+<Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search} onChange={(e)=>{setSearch(e.target.value)}}>
 
+   
+    {searchList.map( (opt) =>{
+        return(
+            <MenuItem key={opt.user_id} value={opt.email}>{opt.email}</MenuItem>
+        )
+       
+    })}
+
+    {/* <MenuItem key={1} value="1">
+    1 
+    </MenuItem>
+    <MenuItem key={2} value="2">
+    2
+    </MenuItem> */}
+
+</Select>
+<Button onClick={handlesearchsubmit}>Submit</Button>
+</Card>
 
     </div>
-    <Card>
-    <input type='text'/>
- </Card>
+   
     </>)
 }

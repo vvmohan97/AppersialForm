@@ -66,7 +66,8 @@ const [ratingg,setRating]=useState(0)
   const self_aspiration={    self_aspiration : "selfaspiration"
     
   }
-
+  const selectedemail = localStorage.getItem("selected")
+console.log(selectedemail,"email selection");
 const handlemanagercomment=(id,value)=>{
     setManagercomment(managercomment.map((data)=>{
         if(data.id ===id){
@@ -156,14 +157,14 @@ const handlemanagerRating=(id,value)=>{
     }
 
     setErrors(errors);
-    axios.post('http://demo.emeetify.com:5052/appraisel/users/AddComment?email=vvmohan.vsr@gmail.com&type=manager'
+    axios.post(`http://demo.emeetify.com:5052/appraisel/users/AddComment?email=${selectedemail}&&type=employee`
     
     ,{managerRating,managercomment}).then((response)=>{
         console.log(response.data)
     })
     .catch("error")
 
-    axios.post('http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=vvmohan.vsr@gmail.com&type=employee' 
+    axios.post(`http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=${selectedemail}&type=employee` 
     ,{self_aspiration}
     ).then((response)=>{    
         console.log(response.data)
@@ -205,7 +206,7 @@ const handlemanagerRating=(id,value)=>{
       })
       .catch(e => { console.log("e", e) })
  
-  }, [])
+  },[])
 
 return (
     <>

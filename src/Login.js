@@ -42,7 +42,7 @@ const handleSubmit=(e)=>{
 
         if(response.data.status!== false){
             console.log("login sucecss")
-            navigate("/manager");
+            navigate("/managersearch");
         }
         else{
             console.log("failed")
