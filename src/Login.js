@@ -24,13 +24,21 @@ const navigate=useNavigate()
     const [value,setValue]=useState("")
     const handleClick=()=>{
         signInWithPopup(auth,provider).then((data)=>{
-            console.log(data)
+            console.log(data,"data")
+            console.log(data.user.email,"mailId")
             setValue(data.user.email)
+            axios.post('http://demo.emeetify.com:5052/appraisel/users/register',{
+                email: data.user.email
+                }).then((response)=>{
+                   console.log(response.data,"email ")
+                }).catch("error")
             localStorage.setItem("email",data.user.email)
             localStorage.setItem("photo",data.user.photoURL)
             localStorage.setItem('name',data.user.displayName)
             navigate("/home")
      })
+console.log(value,"value")
+    
     }
 
 const handleSubmit=(e)=>{
@@ -154,11 +162,11 @@ const LoginDeatils=[{
                 {
                     errors.password && <Typography sx={{color:"red"}}>{errors.password}</Typography>
                 }
-                    <Button
+                    {/* <Button
                     
                     sx={{marginTop:1, marginRight:10 }}
                     
-                    >forgot my password</Button>
+                    >forgot my password</Button> */}
                     <Button type='submit'
                     variant='contained'
                     color='primary'

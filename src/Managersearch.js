@@ -26,7 +26,6 @@ const [searchValue , setSearchValue] = useState('');
 
 // }
 const selectedemail = localStorage.setItem("selected", search)
-console.log(selectedemail);
 const handlesearchsubmit=(e)=>{
     navigates("/manager")
     axios.get(`http://demo.emeetify.com:5052/appraisel/users/userNames?email=${selectedemail}`)

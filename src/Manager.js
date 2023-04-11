@@ -34,6 +34,8 @@ export function Manager() {
   const navigates = useNavigate();
 const [average,setAverage]=useState(0);
 const [ratingg,setRating]=useState(0)
+
+const [fetchedData,setFetchedData]= useState()
     const [managerRating,setManagerRating]=useState([
         {t_id:1,id:1,name:'manager_rating',value:0},
         {t_id:2,id:2,name:'manager_rating',value:0},
@@ -67,7 +69,17 @@ const [ratingg,setRating]=useState(0)
     
   }
   const selectedemail = localStorage.getItem("selected")
-console.log(selectedemail,"email selection");
+
+
+
+useEffect(()=>{
+          axios.get(`http://demo.emeetify.com:5052/appraisel/users/Consolidate?email=${selectedemail}`)
+          .then((response)=>{
+            console.log(response.data,"sucess");
+            setFetchedData(response.data.data)
+          }).catch(("error"))
+},[selectedemail])
+console.log(fetchedData,"fetch")
 const handlemanagercomment=(id,value)=>{
     setManagercomment(managercomment.map((data)=>{
         if(data.id ===id){
@@ -187,7 +199,6 @@ const handlemanagerRating=(id,value)=>{
     console.log(avg,"avg")
     setAverage(avg.toFixed(2))
   },[managerRating])
-  console.log(average,"average");
    
 //   useEffect(() => {
 //     console.log(justifyrating.length)
@@ -390,7 +401,7 @@ return (
                         <Box sx={{ marginTop: "40px", marginLeft: '40px' }}
                         >
                           <Grid container spacing={1}>
-                            <Grid item sx={{marginLeft:'120px'}}>
+                            <Grid item sx={{marginLeft:'130px'}}>
                               <Typography sx={{ fontSize: '16px' }} disabled>
                                 Self Rating<span style={{ color: 'red' }}>*</span>
                               </Typography>
@@ -414,7 +425,7 @@ return (
                             </Grid>
                             
                           
-                           <Grid item sx={{ marginTop: "10px",marginLeft:'120px' }}>
+                           <Grid item sx={{ marginTop: "10px",marginLeft:'130px' }}>
                             {managerRating.map((data)=>{
                                 return(
                                     <div key={data.id}>
@@ -482,9 +493,11 @@ return (
                 
 <Divider  sx={{ width: '100%' ,marginTop:'20px'}} />
               <Grid container spacing={1}>
-                <Grid item sx={{ marginTop: "50px",marginLeft:"158px" }}>
+                <Grid item sx={{ marginTop: "50px",marginLeft:"180px" }}>
                   <Typography sx={{ fontSize: '20px' }}>Employee Average Rating <span style={{ color: 'red' }}>*</span></Typography>
-                  <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'50px',textAlign:'center'}}></Card>
+                  <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'50px',textAlign:'center'}}
+                  
+                  > {fetchedData?.employee_self_rating}</Card>
                   {/* <TextareaAutosize sx={{ marginTop: '10px', }} minRows={5} 
               ></TextareaAutosize> */}
         
@@ -499,9 +512,9 @@ return (
               
                    </Grid>
                    <Grid container sx={{marginTop:'50px'}}>
-                <Grid item xs={4} sx={{marginLeft:'155px'}}>
+                <Grid item xs={4} sx={{marginLeft:'180px'}}>
                   <Typography sx={{ fontSize: '20px' }}>Manager's Average Rating<span style={{ color: 'red' }}>*</span></Typography>
-                <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'50px',textAlign:'center'}}>{average}</Card>
+                <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'50px',textAlign:'center'}} >{fetchedData?.manager_consolidated_rating}</Card>
                 </Grid>
                   <Grid item xs={4} sx={{marginLeft:"100px"}}>
                   <Typography sx={{ fontSize: '20px' }}>Manager's Feedback<span style={{ color: 'red' }}>*</span></Typography>

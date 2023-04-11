@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 
+
 export function Home() {
   const [selectedDate, handleDateChange] = useState(null);
   const [year, setYear] = useState()
@@ -37,48 +38,48 @@ export function Home() {
   const [deatil, setDeatil] = useState([]);
   const [ratingg, setRating] = useState(0);
 
-  const [average,setAverage]=useState(0)
+  const [average,setAverage]=useState(0);
 
   const [selfRating , setselfRating] = useState([
-    {t_id:1, id:1 ,name: 'self_rating' , value:0},
-    {t_id:2, id:2 ,name: 'self_rating' , value:0},
-    {t_id:3, id:3 ,name: 'self_rating' , value:0},
-    {t_id:4, id:4 ,name: 'self_rating' , value:0},
-    {t_id:5, id:5 ,name: 'self_rating' , value:0},
-    {t_id:6, id:6 ,name: 'self_rating' , value:0},
-    {t_id:7, id:7 ,name: 'self_rating' , value:0},
-    {t_id:8, id:8 ,name: 'self_rating' , value:0},
-    {t_id:9, id:9 ,name: 'self_rating' , value:0},
-    {t_id:10, id:10 ,name: 'self_rating' , value:0},
-    {t_id:11, id:11 ,name: 'self_rating' , value:0},
+    {t_id:1, name: 'self_rating' , value:0},
+    {t_id:2, name: 'self_rating' , value:0},
+    {t_id:3, name: 'self_rating' , value:0},
+    {t_id:4, name: 'self_rating' , value:0},
+    {t_id:5,name: 'self_rating' , value:0},
+    {t_id:6, name: 'self_rating' , value:0},
+    {t_id:7,name: 'self_rating' , value:0},
+    {t_id:8, name: 'self_rating' , value:0},
+    {t_id:9,  name: 'self_rating' , value:0},
+    {t_id:10, name: 'self_rating' , value:0},
+    {t_id:11,name: 'self_rating' , value:0},
   ]);
 
   const [comment , setComment] = useState([
-    {t_id:1 ,id:1 ,name: 'self_comment' , value:'' , validate:validateComment},
-    {t_id:2, id:2 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:3 ,id:3 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:4 ,id:4 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:5 ,id:5 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:6, id:6 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:7 ,id:7 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:8, id:8 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:9, id:9 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:10 ,id:10 ,name: 'self_comment' , value:'',validate:validateComment},
-    {t_id:11, id:11 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:1, name: 'self_comment' , value:'' , validate:validateComment},
+    {t_id:2,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:3 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:4 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:5 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:6, name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:7 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:8, name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:9, name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:10 ,name: 'self_comment' , value:'',validate:validateComment},
+    {t_id:11, name: 'self_comment' , value:'',validate:validateComment},
   ]);
 
-  const handleselfRating = (id,value) =>{
+  const handleselfRating = (t_id,value) =>{
     setselfRating(selfRating.map( (data)=> {
-        if(data.id === id){
+        if(data.t_id === t_id){
           return{...data , value}
         }
         return data;
     } ))
   }
 
-  const handleComment = (id,value) =>{
+  const handleComment = (t_id,value) =>{
     setComment(comment.map( (data)=> {
-        if(data.id === id){
+        if(data.t_id === t_id){
           const error = data.validate(value);
           return{...data , value,error}
         }
@@ -90,7 +91,7 @@ export function Home() {
 
 
     if(!name){
-      return "comment is required"
+      return "Comment required"
     }
     return "";
   }
@@ -111,8 +112,8 @@ const payload ={
   manager_name :manager,
   role_id:roleId,
   designation:designation,
-  department:'department',
-  joining_date:'joining',
+  department: department,
+  joining_date: joining,
   review_period:'2023'
 }
 
@@ -168,17 +169,20 @@ const payload ={
     if(!roleId){
       errors.roleId ="*Requried"
     }
+    if(!selfrating){
+      errors.selfrating="*Requried"
+    }
 
     setErrors(errors);
 
 
-     axios.put('http://demo.emeetify.com:5052/appraisel/users/FormDetails?email='+ localEmail,payload)
+     axios.put(`http://demo.emeetify.com:5052/appraisel/users/FormDetails?email=${localEmail}`,payload)
      .then((response)=>{
       console.log("putApi working")
       console.log(response.data)
      }).catch("error")
 
-     axios.post(`http://demo.emeetify.com:5052/appraisel/users/AddCommentemail=${localEmail}&&type=employee`
+     axios.post(`http://demo.emeetify.com:5052/appraisel/users/AddComment?email=${localEmail}&&type=employee`
      ,{selfRating , comment}
      ).then((response)=>{
       console.log(response.data)
@@ -186,9 +190,7 @@ const payload ={
      
   }
 
-console.log(selfRating,"sss");
 
-console.log(ratingg,"rr");
  
 useEffect((data) => {
   let total = 0;
@@ -207,7 +209,6 @@ useEffect((data) => {
  
 }, [ratingg,average]);
 
-console.log(average,"vvv");
   useEffect(() => {
     console.log("working");
     axios.get("http://demo.emeetify.com:5052/appraisel/users/getDetails")
@@ -244,7 +245,7 @@ return (
     </div>
   </Grid>
   <Grid item xs={6}>
-    <div style={{marginTop:'15px',fontSize:'22px',marginLeft:'120px'}}>Performance Appraisal Form</div>
+    <div style={{marginTop:'15px',fontSize:'24px',fontWeight:'bold',fontFamily:'Times New',marginLeft:'120px'}}>Performance Appraisal Form</div>
   </Grid>
    <Grid item xs={4}>
     <div style={{marginTop:'15px',float:'right',marginRight:'150px'}}>
@@ -264,7 +265,7 @@ return (
 
  <Container >
   <form onSubmit={handleSubmit}>
-  <Card style={{marginTop:'80px',height:'550px',width:'90vw',
+  <Card style={{marginTop:'80px',height:'630px',width:'90vw',
     boxShadow:'0px 12px 15px 10px #ccc'
    
 }}>
@@ -303,28 +304,45 @@ return (
 
               </TextField>
               {
-                errors.designation && <Grid sx={{ marginLeft: "70px", color: "red" }}>*Requried</Grid>
+                errors.designation && <Grid sx={{ marginLeft: "90px", color: "red" }}>*Requried</Grid>
               }
             </Grid>
             <Grid item lg={6}>
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}>
-                <Stack>
-                  <DatePicker
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack spacing={3}>
+                <DesktopDatePicker 
                     label="Joining Date"
-                    inputFormat="MM/DD/YYYY"
+                    inputFormat="DD/MM/ YYYY"
 
-                    renderInput={(params) =>
-                      <TextField {...params} sx={{ marginTop: 7, marginLeft:'230px', width: '260px' }} />}
+                    renderInput={(params) => <TextField {...params} sx={{ width: '260px', marginLeft:'230px', marginTop: 5 }} />}
                     onChange={(e) => {
-
-                      console.log(e)
-                    }}
-                  />
+                      setJoining(e)
+                    }
+                    }
+                />
                 </Stack>
               </LocalizationProvider>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                
+                                  <DemoContainer components={['DatePicker']}>
+
+                                  <DatePicker
+                                  disableFuture={true}
+                                    style={{
+                                      marginLeft: "100px",
+                                      width: "200px",
+                                      marginTop: "10px",
+                                      height:"0.4em !important",
+                                    }}
+                                    name="joining_date"
+                                    views={["year", "month", "day"]}
+                                  />
+                                </DemoContainer>
+                               
+                              </LocalizationProvider> */}
               {
-                errors.manager && <Grid sx={{ marginLeft: "240px", marginTop: "3px", color: "red" }}>*Requried</Grid>
+                errors.joining && <Grid sx={{ marginLeft: "240px", marginTop: "3px", color: "red" }}>*Requried</Grid>
               }
             </Grid>
             <Grid item lg={6}>
@@ -348,7 +366,7 @@ return (
                 </MenuItem>
               </TextField>
               {
-                errors.department && <Grid sx={{ marginLeft: "70px", color: "red" }}>*Requried</Grid>
+                errors.department && <Grid sx={{ marginLeft: "90px", color: "red" }}>*Requried</Grid>
               }
             </Grid>
             <Grid item lg={6}>
@@ -386,7 +404,7 @@ return (
 
               </TextField>
               {
-                errors.manager && <Grid sx={{ marginLeft: "70px", color: "red" }}>*Requried</Grid>
+                errors.manager && <Grid sx={{ marginLeft: "90px", color: "red" }}>*Requried</Grid>
               }
             </Grid>
             <Grid item lg={6}>
@@ -406,7 +424,7 @@ return (
               
               </TextField>
               {
-                errors.manager && <Grid sx={{ marginLeft: "70px", color: "red" }}>*Requried</Grid>
+                errors.roleId && <Grid sx={{ marginLeft: "250px", color: "red" }}>*Requried</Grid>
               }
             </Grid>
         
@@ -434,7 +452,7 @@ return (
                               KRA:{d.kra}</Typography>
                           }
                         </Typography>
-                        <Box sx={{ marginLeft: '40px', marginTop: '20px', padding: '30px', outline: "inset", outlineColor: "blue" }}>
+                        <Box sx={{ marginLeft: '40px', marginTop: '20px', padding: '30px', outline: "inset",borderRadius:'15px', outlineColor: "blue" }}>
                           <Typography key={d.id}>{d.measures}
                           </Typography>
                         </Box>
@@ -446,8 +464,8 @@ return (
                             {selfRating.map( (data) =>{
                               return(
                           
-                                <div key={data.id }>
-                                  {d.t_id === data.id ? 
+                                <div key={data.t_id }>
+                                  {d.t_id === data.t_id ? 
                                   <>
                                     <Typography sx={{ fontSize: '16px' }}>
                               Self Rating<span style={{ color: 'red' }}>*</span>
@@ -457,9 +475,9 @@ return (
                               onChange={(e) => {
                                 // setValue(e.target.value)
                                 // setSelfrating(e.target.value)
-                                handleselfRating(data.id , e.target.value)
+                                handleselfRating(data.t_id , e.target.value)
                                 console.log(typeof(parseInt(e.target.value)),"hhh")
-                                setRating([data.id],parseInt(e.target.value))
+                                setRating([data.t_id],parseInt(e.target.value))
 
                                 // selfRating[data.id] =setRating(parseInt(e.target.value));
                               }}
@@ -473,6 +491,7 @@ return (
                               <MenuItem key={2} value="2">2</MenuItem>
                               <MenuItem key={1} value="1">1</MenuItem>
                             </Select>
+                       
                                   </>
                                 : ""}
                                 
@@ -487,13 +506,18 @@ return (
                                 comment.map((data) =>{
                                   return(
                                     <div>
-                                        {d.t_id === data.id ? 
+                                        {d.t_id === data.t_id ? 
                                         
                                         <>
                                           <Typography sx={{ fontSize: '16px' }}>Justify your Rating<label style={{ color: 'red' }}>*</label></Typography>
                               <TextareaAutosize sx={{ marginTop: '10px', }} minRows={6} cols={30}
-                                onChange={(e) => handleComment(data.id , e.target.value)}></TextareaAutosize>
-                                {data.error && <p>{data.error}</p>}
+                                onChange={(e) => {
+                                  setSelfaspiration(e.target.value)
+                                  handleComment(data.t_id , e.target.value)}}></TextareaAutosize>
+                                {data.error && <p  style={{color:"red"}}>{data.error}</p>}
+                                {
+                errors.selfaspiration && <Grid sx={{ marginLeft: "50px", color: "red" }}>*Requried</Grid>
+              }
                                         </>
                                         : ""}
                                     </div>
