@@ -16,7 +16,7 @@ export function Managersearch(){
 
 
 const [search,setSearch]=useState()
-const navigates=useNavigate();
+const navigate=useNavigate();
 const [logout,setLogout]= useState()
 const [searchList,setSearchList]=useState([])
 const [searchValue , setSearchValue] = useState('');
@@ -25,16 +25,20 @@ const [searchValue , setSearchValue] = useState('');
 //     setSearch(e.target);
 
 // }
-const selectedemail = localStorage.setItem("selected", search)
+localStorage.setItem("selected", search)
+const selectedEmail = localStorage.getItem("selected");
+// console.log(selectedEmail,"search");
 const handlesearchsubmit=(e)=>{
-    navigates("/manager")
-    axios.get(`http://demo.emeetify.com:5052/appraisel/users/userNames?email=${selectedemail}`)
-    .then((response)=>{
-        console.log(response.data);
-    }).catch("error")
-    
+   
+
+
+    if(selectedEmail !== undefined && selectedEmail === search){
+      navigate("/managernew")
+    }
+   
 
 }
+useEffect(()=>{},[search,selectedEmail])
 
 useEffect( () =>{
     axios.get('http://demo.emeetify.com:5052/appraisel/users/userList')
@@ -54,7 +58,7 @@ const handleLogout = (e) => {
     localStorage.removeItem("photo")
     localStorage.removeItem("name")
 
-    navigates("/")
+    navigate("/")
     window.location.reload()
     console.log(logout);
  }
@@ -86,7 +90,7 @@ const handleLogout = (e) => {
   </Grid>
  </Grid>
 <Card style={{marginTop:"150px",marginLeft:"380px",height:"150px",width:"400px",alignItems:"center"}}> 
-<Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search} onChange={(e)=>{setSearch(e.target.value)}}>
+{/* <Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search} onChange={(e)=>{setSearch(e.target.value)}}>
 
    
     {searchList.map( (opt) =>{
@@ -96,12 +100,18 @@ const handleLogout = (e) => {
        
     })}
 
-    {/* <MenuItem key={1} value="1">
-    1 
-    </MenuItem>
-    <MenuItem key={2} value="2">
-    2
-    </MenuItem> */}
+
+</Select> */}
+<Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search} onChange={(e)=>{setSearch(e.target.value)}}>
+
+   
+{searchList.map( (opt) =>{
+    return(
+        <MenuItem key={opt.user_id} value={opt.email}>{opt.email}</MenuItem>
+    )
+   
+})}
+
 
 </Select>
 <Button onClick={handlesearchsubmit}>Submit</Button>

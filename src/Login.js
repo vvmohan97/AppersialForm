@@ -35,7 +35,7 @@ const navigate=useNavigate()
             localStorage.setItem("email",data.user.email)
             localStorage.setItem("photo",data.user.photoURL)
             localStorage.setItem('name',data.user.displayName)
-            navigate("/home")
+            navigate("/homevalid")
      })
 console.log(value,"value")
     
@@ -51,6 +51,7 @@ const handleSubmit=(e)=>{
         if(response.data.status!== false){
             console.log("login sucecss")
             navigate("/managersearch");
+            toast("login Successfully")
         }
         else{
             console.log("failed")
