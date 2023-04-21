@@ -1,7 +1,7 @@
 import {Box, TextField, Button, Typography, Grid} from '@mui/material';
 
 import {useNavigate} from 'react-router-dom' 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import {GoogleButton} from 'react-google-button'
@@ -35,10 +35,9 @@ const navigate=useNavigate()
             localStorage.setItem("email",data.user.email)
             localStorage.setItem("photo",data.user.photoURL)
             localStorage.setItem('name',data.user.displayName)
+            localStorage.setItem('token',data.user.accessToken)
             navigate("/homevalid")
-     })
-console.log(value,"value")
-    
+     })    
     }
 
 const handleSubmit=(e)=>{
@@ -49,12 +48,10 @@ const handleSubmit=(e)=>{
         console.log("login",response.data.status)
 
         if(response.data.status!== false){
-            console.log("login sucecss")
             navigate("/managersearch");
             toast("login Successfully")
         }
         else{
-            console.log("failed")
             toast(" login credentials mismatch");
 
         }
@@ -69,19 +66,10 @@ const handleSubmit=(e)=>{
     if(!email){
         errors.email=("*Email Requried")
     }
-    
-
     if(!password){
         errors.password=("*Password Requried");
     }
     setErrors(errors)
-
-    
-
-
-
-
-
 
     // if(email==LoginDeatils[0].email && password==LoginDeatils[0].password){
     //     console.log("workingLogin");
@@ -99,6 +87,16 @@ const handleSubmit=(e)=>{
     // }
    
 }
+
+useEffect(()=>{
+    if(!localStorage.getItem('token')){
+        navigate("/");
+    }else{
+        console.log('routing not working');
+    }
+},[])
+
+
 const LoginDeatils=[{
     email:"admin@gmail.com",password:"Admin@123"},
     ]

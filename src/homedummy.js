@@ -18,7 +18,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-
 // import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -28,7 +27,6 @@ export function Homedummy() {
 
 const [popmsg,setPopmsg] =useState(false)
 const [nameError,setNameError]=useState("")
-// console.log(selfRating1,comments1,"comment")
   const [selectedDate, handleDateChange] = useState(null);
   const [year, setYear] = useState()
   const [name, setName] = useState("");
@@ -84,7 +82,17 @@ const [formData,setFormData]=useState({
   designation:"",
   department:"",
   managerName:"",
-
+  selfRating1:0,
+  selfRating2:0,
+  selfRating3:0,
+  selfRating4:0,
+  selfRating5:0,
+  selfRating6:0,
+  selfRating7:0,
+  selfRating8:0,
+  selfRating9:0,
+  selfRating10:0,
+selfRating11:0,
   selfaspiration:"",
 
 })
@@ -98,17 +106,18 @@ const [formErrors,setFormErrors]=useState({
 })
 
 // Error handling ends here
-useEffect(()=>{
+
  
-  let total = (parseInt(selfRating1)+parseInt(selfRating2)+parseInt(selfRating3)+parseInt(selfRating4)+parseInt(selfRating5)+
-  parseInt(selfRating6)+parseInt(selfRating7)+parseInt(selfRating8)+parseInt(selfRating9)+parseInt(selfRating10)+parseInt(selfRating11))
-  console.log(typeof(parseFloat(total)),"par");
-  console.log(total,"tot");
+
+useEffect(()=>{
+    
+   
+
+  let total = (parseInt(formData.selfRating1)+parseInt(formData.selfRating2)+parseInt(formData.selfRating3)+parseInt(formData.selfRating4)+parseInt(formData.selfRating5)+
+  parseInt(formData.selfRating6)+parseInt(formData.selfRating7)+parseInt(formData.selfRating8)+parseInt(formData.selfRating9)+parseInt(formData.selfRating10)+parseInt(formData.selfRating11))
   let avg = total/11;
-  console.log(avg,"avg");
   setAverage(avg.toFixed(2))
-},[selfRating1,selfRating2,selfRating3,selfRating4,selfRating5,selfRating6,selfRating7,selfRating8,selfRating9,selfRating10,selfRating11])
-console.log(average,"avg");
+},[formData.selfRating1,formData.selfRating2,formData.selfRating3,formData.selfRating4,formData.selfRating5,formData.selfRating6,formData.selfRating7,selfRating8,formData.selfRating9,formData.selfRating10,formData.selfRating11])
 /* self rating usestates */
 const selfAspirationpayload ={
     'self_aspirations':formData.selfaspiration
@@ -178,13 +187,12 @@ const commentpayload = [
   const handleLogout =      (e) => {
     e.preventDefault();
     setLogout(e.target.value)
-    localStorage.removeItem("email")
-    localStorage.removeItem("photo")
-    localStorage.removeItem("name")
+    // localStorage.removeItem("email")
+    // localStorage.removeItem("photo")
+    // localStorage.removeItem("name")
 
     navigates("/")
-    window.location.reload()
-    console.log(logout);
+    window.localStorage.clear();
  }
 const localEmail=localStorage.getItem('email')
 const payload ={
@@ -197,11 +205,16 @@ const payload ={
   review_period:'2023'
 }
 
-console.log(joining,"date");
+useEffect(()=>{
+    if(!localStorage.getItem('token')){
+        navigates("/")
+    }else{
+        navigates("/homevalid")
+    }
+},[])
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(commentpayload,"input");   
     const errors = {};
     let formIsValid = true;
 
@@ -421,8 +434,7 @@ console.log(joining,"date");
 
       axios.put(`http://demo.emeetify.com:5052/appraisel/users/FormDetails?email=${localEmail}`,payload)
       .then((response)=>{
-       console.log("putApi working")
-       console.log(response.data)
+       console.log("")
        if(response.data.status === true){
          setPopmsg(true);
          toast("Details submitted successfully")
@@ -438,16 +450,16 @@ console.log(joining,"date");
      axios.post(`http://demo.emeetify.com:5052/appraisel/users/AddComment?email=${localEmail}&&type=employee`
      ,commentpayload
      ).then((response)=>{
-      console.log(response.data)
+      console.log("")
      }).catch("error")
      
      axios.put(`http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=${localEmail}&type=employee`,selfAspirationpayload)
-     .then((response)=>{console.log(response.data);}).catch("error")
+     .then((response)=>{console.log("");}).catch("error")
     }
 
   const handleInputChange=(e)=>{
     const {name,value} = e.target;
-
+     
     setFormData({
       ...formData,
       [name]:value,
@@ -633,7 +645,6 @@ useEffect((data) => {
 }, [ratingg,average]);
 
   useEffect(() => {
-    console.log("working");
     axios.get("http://demo.emeetify.com:5052/appraisel/users/getDetails")
       .then(response => {
         setDeatil(response.data.data)
@@ -654,7 +665,8 @@ return (
     </div>
   </Grid>
   <Grid item xs={6}>
-    <div style={{marginTop:'15px',fontSize:'24px',fontWeight:'bold',fontFamily:'Times New',marginLeft:'120px'}}>Performance Appraisal Form</div>
+    <div style={{marginTop:'15px',fontSize:'24px',fontWeight:'bold',fontFamily:'Times New',marginLeft:'120px'}}>
+    Performance Appraisal Form</div>
   </Grid>
    <Grid item xs={4}>
     <div style={{marginTop:'15px',float:'right',marginRight:'150px'}}>
@@ -718,7 +730,7 @@ return (
                 </MenuItem>
 
               </TextField>
-              {formErrors.designation && !formData.designation && <Grid sx={{ marginLeft: "150px", marginTop: "3px", color: "red" }}>{formErrors.designation}</Grid>}
+              {formErrors.designation && !formData.designation && <Grid sx={{ marginLeft: "100px", marginTop: "3px", color: "red" }}>{formErrors.designation}</Grid>}
 
               {/* {
                 formErrors.designation && !formData.designation &&<Grid sx={{ marginLeft: "90px", color: "red" }}>*Requried</Grid>
@@ -740,7 +752,6 @@ return (
                     renderInput={(params) => <TextField {...params} type="date" sx={{ width: '260px', marginLeft:'230px', marginTop: 5 }} />}
                     onChange={(e) => {
                       setJoining(e)
-                      console.log(e.$d);
                     }
                     }
                 />
@@ -775,7 +786,7 @@ return (
                 </MenuItem>
               </TextField>
               {formErrors.department
-               && !formData.department && <Grid sx={{ marginLeft: "200px", marginTop: "3px", color: "red" }}>{formErrors.department}</Grid>}
+               && !formData.department && <Grid sx={{ marginLeft: "100px", marginTop: "3px", color: "red" }}>{formErrors.department}</Grid>}
 
 
               {/* {
@@ -819,7 +830,7 @@ return (
                                 </MenuItem>
 
               </TextField>
-              {formErrors.managerName && !formData.managerName && <Grid sx={{   marginTop: "3px", marginLeft:"150px", color: "red" }}>{formErrors.managerName}</Grid>}
+              {formErrors.managerName && !formData.managerName && <Grid sx={{   marginTop: "3px", marginLeft:"100px", color: "red" }}>{formErrors.managerName}</Grid>}
 
             </Grid>
             <Grid item lg={6}>
@@ -884,7 +895,7 @@ return (
                                 </Select>
 
                             </Stack>
-                            {formErrors.selfRating1 && !formData.selfRating1 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating1}</Grid>}
+                            {formErrors.selfRating1 && !formData.selfRating1 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating1}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -899,7 +910,7 @@ return (
 
                                </Stack>
                         </Stack>
-               {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment1}</Grid>}
+               {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px",marginTop:"-30px",color: "red" }}>{formErrors.selfComment1}</Grid>}
    
                 </Grid>
                 <Grid>
@@ -936,7 +947,7 @@ return (
                                 </Select>
 
                             </Stack>
-                                                            {formErrors.selfRating2 && !formData.selfRating2 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating2}</Grid>}
+                             {formErrors.selfRating2 && !formData.selfRating2 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating2}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -953,7 +964,7 @@ return (
                                </Stack>
 
                         </Stack>
-                              {formErrors.selfComment2 && !formData.selfComment2 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment2}</Grid>}
+                              {formErrors.selfComment2 && !formData.selfComment2 && <Grid sx={{ marginLeft: "700px", marginTop: "-25px", color: "red" }}>{formErrors.selfComment2}</Grid>}
                 </Grid>
                 <Grid>
                         <Stack style={{marginTop:'40px'}}> 
@@ -989,7 +1000,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating3 && !formData.selfRating3 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating3}</Grid>}
+                            {formErrors.selfRating3 && !formData.selfRating3 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating3}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1004,7 +1015,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment1}</Grid>}
+                        {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment1}</Grid>}
   
                 </Grid>
                 <Grid>
@@ -1054,7 +1065,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating4 && !formData.selfRating4 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating4}</Grid>}
+                            {formErrors.selfRating4 && !formData.selfRating4 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating4}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1069,7 +1080,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment4 && !formData.selfComment4 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment4}</Grid>}
+                        {formErrors.selfComment4 && !formData.selfComment4 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment4}</Grid>}
 
                     
                 </Grid>
@@ -1105,7 +1116,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating5 && !formData.selfRating5 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating5}</Grid>}
+                            {formErrors.selfRating5 && !formData.selfRating5 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating5}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1120,7 +1131,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment5 && !formData.selfComment5 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment5}</Grid>}
+                        {formErrors.selfComment5 && !formData.selfComment5 && <Grid sx={{ marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment5}</Grid>}
 
                     
                 </Grid>
@@ -1157,7 +1168,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating6 && !formData.selfRating6 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating6}</Grid>}
+                            {formErrors.selfRating6 && !formData.selfRating6 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating6}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1172,7 +1183,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment6 && !formData.selfComment6 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment6}</Grid>}
+                        {formErrors.selfComment6 && !formData.selfComment6 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment6}</Grid>}
 
                     
                 </Grid>
@@ -1209,7 +1220,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating7 && !formData.selfRating7 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating7}</Grid>}
+                            {formErrors.selfRating7 && !formData.selfRating7 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating7}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1224,7 +1235,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment7 && !formData.selfComment7 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment7}</Grid>}
+                        {formErrors.selfComment7 && !formData.selfComment7 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment7}</Grid>}
 
                     
                 </Grid>
@@ -1262,7 +1273,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating8 && !formData.selfRating8 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating8}</Grid>}
+                            {formErrors.selfRating8 && !formData.selfRating8 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating8}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1277,7 +1288,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment8 && !formData.selfComment8 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment8}</Grid>}
+                        {formErrors.selfComment8 && !formData.selfComment8 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment8}</Grid>}
 
                     
                 </Grid>
@@ -1314,7 +1325,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating9 && !formData.selfRating9 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating9}</Grid>}
+                            {formErrors.selfRating9 && !formData.selfRating9 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating9}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1329,7 +1340,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment9 && !formData.selfComment9 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment9}</Grid>}
+                        {formErrors.selfComment9 && !formData.selfComment9 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment9}</Grid>}
 
                     
                 </Grid>
@@ -1368,7 +1379,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating10 && !formData.selfRating10 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating10}</Grid>}
+                            {formErrors.selfRating10 && !formData.selfRating10 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating10}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1383,7 +1394,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment10 && !formData.selfComment10 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment10}</Grid>}
+                        {formErrors.selfComment10 && !formData.selfComment10 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment10}</Grid>}
 
                       
                 </Grid>
@@ -1421,7 +1432,7 @@ return (
                                 </Select>
                            
                             </Stack>
-                            {formErrors.selfRating11 && !formData.selfRating11 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating11}</Grid>}
+                            {formErrors.selfRating11 && !formData.selfRating11 && <Grid sx={{ marginLeft: "-90px", marginTop: "90px", color: "red" }}>{formErrors.selfRating11}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -1436,20 +1447,20 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment11 && !formData.selfComment11 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment11}</Grid>}
+                        {formErrors.selfComment11 && !formData.selfComment11 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment11}</Grid>}
 
                 </Grid>
 <Divider  sx={{ width: '100%' ,marginTop:'20px'}} />
               <Grid container spacing={1}>
-                <Grid item sx={{ marginTop: "50px",marginLeft:"105px" ,marginTop:'20px'}}>
+                <Grid item sx={{ marginTop: "50px",marginLeft:"125px" ,marginTop:'20px'}}>
                   <Typography sx={{ fontSize: '20px' }}>Employee Average Rating <span style={{ color: 'red' }}>*</span></Typography>
-                 <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'50px',textAlign:'center'}}>
+                 <Card style={{height:'30px',width:'60px',marginTop:'20px',marginLeft:'90px',textAlign:'center'}}>
                   {average}
                  </Card>
         
                 </Grid>
             
-                <Grid item sx={{ marginTop: "20px", marginLeft: "210px" }}>
+                <Grid item sx={{ marginTop: "20px", marginLeft: "280px" }}>
                   <Typography sx={{ fontSize: '20px' }}>Self Aspirations  <span style={{ color: 'red' }}>*</span></Typography>
                   <TextareaAutosize sx={{ marginTop: '10px' }} minRows={5} 
                   name="selfaspiration"
@@ -1460,16 +1471,17 @@ return (
 
                 </Grid>
                 
-                {formErrors.selfaspiration && !formData.selfaspiration && <Grid sx={{ marginLeft: "590px", marginTop: "0px", color: "red" }}>{formErrors.selfaspiration}</Grid>}
+                {formErrors.selfaspiration && !formData.selfaspiration && <Grid sx={{ marginLeft: "680px", marginTop: "0px", color: "red" }}>{formErrors.selfaspiration}</Grid>}
                    </Grid>
              
            
               <Divider  sx={{ width: '100%', marginTop: "15px" }} />
               <div style={{marginLeft:'450px',marginBottom:'20px'}}>
-              <Button type="submit" variant="contained" onClick={handleSubmit} sx={{
+              <Button type="submit" variant="contained"  sx={{
                 width: "230px", backgroundColor: "green",
                  marginTop: "40px"
               }} > Submit</Button>
+             
               </div>
              
   </Card>
