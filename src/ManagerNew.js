@@ -13,6 +13,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { async } from "@firebase/util";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import Backdrop from '@mui/material/Backdrop';
@@ -31,7 +33,7 @@ export function ManagerNew() {
   const [selfaspiration, setSelfaspiration] = useState("")
   const [teamlead, setTeamlead] = useState("")
   const [errors, setErrors] = useState("")
-
+const [popmsg,setPopmsg]=useState(false)
   const [value, setValue] = useState("")
   const [logout, setLogout] = useState(true)
   const navigates = useNavigate();
@@ -169,13 +171,13 @@ export function ManagerNew() {
 
     axios.get(`http://demo.emeetify.com:5052/appraisel/users/userComments?email=${selectedemail}`)
       .then((response) => {
-        // console.log(response.data.data[0].self_aspirations, "feedback");
+        console.log(response.data.data[0].self_aspirations, "feedback");
         setFeedback(response.data.data)
         setPost(response.data.data)
       }).catch("error")
   }, [selectedemail])
   // console.log(fetchedData,"fetch")
-  // console.log(list[0]);
+  // console.log(list[0]?);
   // console.log(feedback[0].employee_self_rating,'fee');
   //console.log(post,"post");
 
@@ -249,7 +251,14 @@ export function ManagerNew() {
 
     ).then((response) => {
       console.log(response.data, "comment")
-      console.log("post working");
+      if(response.data.status === true){
+        setPopmsg(true);
+        toast("Details submitted successfully")
+      }
+      else{
+        setPopmsg(false);
+        toast("All fields are mandatory")
+      }
     })
       .catch("error")
 
@@ -339,7 +348,7 @@ export function ManagerNew() {
                         <TextField variant="outlined"
                           label="" sx={{ width: '260px', marginLeft: '230px', marginTop: 7 }}
                           name="name"
-                          value={list[0].username}
+                          value={list[0]?.username}
                         ></TextField>
 
                       </Grid>
@@ -421,7 +430,7 @@ export function ManagerNew() {
                           sx={{ width: '260px', marginLeft: '80px', marginTop: 5 }}
                           select // tell TextField to render select
                           label="Manager Name"
-                          value={list[0].manager_name}
+                          value={list[0]?.manager_name}
 
                         >
                           <MenuItem value="Rajamanickam R">
@@ -468,7 +477,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select name='self_Rating'
-                          value={list[0].comments[0].self_rating}
+                          value={list[0]?.comments[0]?.self_rating}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -483,7 +492,7 @@ export function ManagerNew() {
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
                         <TextField name='selfComment1'
-                          value={list[0].comments[0].self_comment}
+                          value={list[0]?.comments[0]?.self_comment}
                         />
                       </Stack>
                     </Stack>
@@ -538,7 +547,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[1].self_rating}
+                          value={list[0]?.comments[1]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -553,7 +562,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[1].self_comment}></TextField>
+                        <TextField value={list[0]?.comments[1]?.self_comment}></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -602,7 +611,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[2].self_rating}
+                          value={list[0]?.comments[2]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -617,7 +626,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[2].self_comment} ></TextField>
+                        <TextField value={list[0]?.comments[2]?.self_comment} ></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -679,7 +688,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[3].self_rating}
+                          value={list[0]?.comments[3]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -694,7 +703,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[3].self_comment} ></TextField>
+                        <TextField value={list[0]?.comments[3]?.self_comment} ></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -741,7 +750,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[4].self_rating}
+                          value={list[0]?.comments[4]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -756,7 +765,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[4].self_comment}></TextField>
+                        <TextField value={list[0]?.comments[4]?.self_comment}></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -804,7 +813,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[5].self_rating}
+                          value={list[0]?.comments[5]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -819,7 +828,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[5].self_comment} ></TextField>
+                        <TextField value={list[0]?.comments[5]?.self_comment} ></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -867,7 +876,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[6].self_rating}
+                          value={list[0]?.comments[6]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -882,7 +891,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[6].self_comment}></TextField>
+                        <TextField value={list[0]?.comments[6]?.self_comment}></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -931,7 +940,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[7].self_rating}
+                          value={list[0]?.comments[7]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -946,7 +955,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[7].self_comment} ></TextField>
+                        <TextField value={list[0]?.comments[7]?.self_comment} ></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -994,7 +1003,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[8].self_rating}
+                          value={list[0]?.comments[8]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -1009,7 +1018,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[8].self_comment}
+                        <TextField value={list[0]?.comments[8]?.self_comment}
                         ></TextField>
                       </Stack>
                     </Stack>
@@ -1056,7 +1065,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[9].self_rating}
+                          value={list[0]?.comments[9]?.self_rating}
 
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
@@ -1072,7 +1081,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[9].self_comment}></TextField>
+                        <TextField value={list[0]?.comments[9]?.self_comment}></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -1121,7 +1130,7 @@ export function ManagerNew() {
                         </Stack>
 
                         <Select
-                          value={list[0].comments[10].self_rating}
+                          value={list[0]?.comments[10]?.self_rating}
                         >
                           <MenuItem key={0} defaultValue="select rating">select rating</MenuItem>
                           <MenuItem key={5} value="5">5</MenuItem>
@@ -1136,7 +1145,7 @@ export function ManagerNew() {
                           <InputLabel>Justify Your Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField value={list[0].comments[10].self_comment}></TextField>
+                        <TextField value={list[0]?.comments[10]?.self_comment}></TextField>
                       </Stack>
                     </Stack>
                     <Stack direction='row' style={{ marginTop: '40px' }}>
@@ -1182,7 +1191,7 @@ export function ManagerNew() {
 
                     <Grid item sx={{ marginTop: "50px", marginLeft: "220px" }}>
                       <Typography sx={{ fontSize: '20px' }}>Self Aspirations  <span style={{ color: 'red' }}>*</span></Typography>
-                      <TextareaAutosize sx={{ marginTop: '10px' }} minRows={5} >{feedback[0]?.self_aspirations}</TextareaAutosize>
+                      <TextareaAutosize sx={{ marginTop: '10px' }} minRows={5} >{ feedback[0]?.self_aspirations}</TextareaAutosize>
 
                     </Grid>
 
