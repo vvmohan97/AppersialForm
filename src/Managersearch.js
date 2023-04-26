@@ -4,7 +4,7 @@ import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from './skein_logo1.png';
-
+import {ToastContainer,toast}  from 'react-toastify';
 
 
 
@@ -63,7 +63,7 @@ const handleLogout = (e) => {
     console.log(logout);
  }
     return(<>
-
+<ToastContainer/>
     <div>
     <Grid container style={{top:'0',background:'grey',height:'60px',textAlign:'center',position:'fixed',zIndex:'1000'}}>
   <Grid item xs={2}>

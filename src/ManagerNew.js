@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Loader } from "./Loader";
 
 export function ManagerNew() {
   const [selectedDate, handleDateChange] = useState(null);
@@ -292,13 +293,14 @@ const [popmsg,setPopmsg]=useState(false)
       {
 
         post == null ?
-          <Backdrop
-            sx={{ color: 'blue', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        <Loader/>
+          // <Backdrop
+          //   sx={{ color: 'blue', zIndex: (theme) => theme.zIndex.drawer + 1 }}
 
 
-          >
-            <CircularProgress color="success" />
-          </Backdrop>
+          // >
+          //   <CircularProgress color="success" />
+          // </Backdrop>
           : <>
 
             <ToastContainer />

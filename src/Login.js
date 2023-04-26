@@ -48,8 +48,9 @@ const handleSubmit=(e)=>{
         console.log("login",response.data.status)
 
         if(response.data.status!== false){
+            toast.success("login Successfully")
             navigate("/managersearch");
-            toast("login Successfully")
+           
         }
         else{
             toast(" login credentials mismatch");
