@@ -670,7 +670,7 @@ return (
     boxShadow:'0px 12px 15px 10px #ccc'
    
 }}>
-  <Typography variant="h6" sx={{ textAlign: 'center', fontFamily: 'roboto' ,marginTop:'50px'}}>
+  <Typography variant="h6" sx={{ textAlign: 'center', marginTop:'50px'}}>
           Employee Details</Typography>
             
             <div>
@@ -869,7 +869,7 @@ return (
                                 </Select>
 
                             </Stack>
-                            {formErrors.selfRating1 && !formData.selfRating1 && <Grid sx={{ marginLeft: "-90px", marginTop: "100px", color: "red" }}>{formErrors.selfRating1}</Grid>}
+                            {formErrors.selfRating1 && !formData.selfRating1 && <Grid sx={{ marginLeft: "-90px", marginTop: "200px", color: "red" }}>{formErrors.selfRating1}</Grid>}
 
                             <Stack  style={{marginLeft:'300px'}}> 
                             <Stack direction='row'>
@@ -882,7 +882,7 @@ return (
 
                                </Stack>
                         </Stack>
-               {/* {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment1}</Grid>} */}
+               {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "0px", color: "red" }}>{formErrors.selfComment1}</Grid>}
    
                 </Grid>
                 <Grid>

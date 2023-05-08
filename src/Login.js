@@ -123,7 +123,7 @@ const LoginDeatils=[{
                 alignItems={"center"}
                  justifyContent={'center'}
                  margin={'auto'} 
-                 marginTop={5}
+                 marginTop={11}
                  padding={5}
                  
                  borderRadius={5}
@@ -133,7 +133,9 @@ const LoginDeatils=[{
                 //  }}}
                  >
                     <Typography  variant="h2" padding={2}
-                     textAlign={'center'} >Login</Typography>
+                     textAlign={'center'}
+                     sx={{fontFamily:"Serif"}}
+                     >Login</Typography>
                  
                 <TextField 
                 type={'email'} 

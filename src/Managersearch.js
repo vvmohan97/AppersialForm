@@ -102,7 +102,9 @@ const handleLogout = (e) => {
 
 
 </Select> */}
-<Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search} onChange={(e)=>{setSearch(e.target.value)}}>
+<Select style={{width:"280px",marginTop:"50px",marginLeft:"20px"}} value={search}
+
+ onChange={(e)=>{setSearch(e.target.value)}}>
 
    
 {searchList.map( (opt) =>{

@@ -107,7 +107,7 @@ const [formErrors,setFormErrors]=useState({
 
 // Error handling ends here
 
- 
+//  console.log(formData.selfComment1,"data");
 
 useEffect(()=>{
     
@@ -201,7 +201,7 @@ const payload ={
   role_id:roleId,
   designation:formData.designation,
   department:formData.department,
-  joining_date: joining,
+ 
   review_period:'2023'
 }
 
@@ -331,119 +331,33 @@ useEffect(()=>{
     setFormErrors(errors);
 
 
-    // if (!name) {
-    //   errors.name = "*Requried"
-
-    // }
-    // if (!designation) {
-    //   errors.designation = "*Requried";
-    // }
     
-    if (!joining) {
-      errors.joining = "*Requried";
-    }
-    // if (!department) {
-    //   errors.department = "*Requried"
-    // }
-    // if (!manager) {
-    //   errors.manager = '*Requried'
-    // }
     if (!justifyrating) {
       errors.justifyrating = "*Requried"
     }
-    // if (!selfrating) {
-    //   errors.selfrating = "*Requried"
-    // }
-    // if (!selfaspiration) {
-    //   errors.selfaspiration = "*Requried"
-    // }
+
     if (!teamlead) {
       errors.teamlead = "*Requried"
     }
     if(!roleId){
       errors.roleId ="*Requried"
     }
-    // if(!selfRating1){
-    //   errors.selfRating1="Requried"
-    // }
-    // if(!selfRating2){
-    //   errors.selfRating2="Requried"
-    // }
-    // if(!selfRating3){
-    //   errors.selfRating3="Requried"
-    // }
-    // if(!selfRating4){
-    //   errors.selfRating4="Requried"
-    // }
-    //   if(!selfRating5){
-    //   errors.selfRating5="Requried"
-    // }
-    // if(!selfRating6){
-    //   errors.selfRating6="Requried"
-    // }
-    // if(!selfRating7){
-    //   errors.selfRating7="Requried"
-    // }
-    // if(!selfRating8){
-    //   errors.selfRating8="Requried"
-    // }
-    // if(!selfRating9){
-    //   errors.selfRating9="Requried"
-    // }
-    // if(!selfRating10){
-    //   errors.selfRating10="Requried"
-    // }
-    // if(!selfRating11){
-    //   errors.selfRating11="Requried"
-    // }
-    // if(!selfComment1){
-    //   errors.selfComment1="Requried"
-    // }
-    // if(!selfComment2){
-    //   errors.selfComment2="Requried"
-    // }
-    //  if(!selfComment3){
-    //   errors.selfComment3="Requried"
-    // }
-    //  if(!selfComment4){
-    //   errors.selfComment4="Requried"
-    // }
-    //  if(!selfComment5){
-    //   errors.selfComment5="Requried"
-    // }
-    //  if(!selfComment6){
-    //   errors.selfComment6="Requried"
-    // }
-    //  if(!selfComment7){
-    //   errors.selfComment7="Requried"
-    // }
-    //  if(!selfComment8){
-    //   errors.selfComment8="Requried"
-    // }
-    //  if(!selfComment9){
-    //   errors.selfComment9="Requried"
-    // }
-    //  if(!selfComment10){
-    //   errors.selfComment10="Requried"
-    // }
-    // if(!selfComment11){
-    //   errors.selfComment11="Requried"
-    // }
+  
     setErrors(errors);
 
 
       axios.put(`http://demo.emeetify.com:5052/appraisel/users/FormDetails?email=${localEmail}`,payload)
       .then((response)=>{
        console.log("")
-       if(response.data.status === true){
+       if(payload !== ""){
          setPopmsg(true);
-         toast("Details submitted successfully")
+         toast("Details submitted successfullyyyyy")
        }
        else{
          setPopmsg(false);
          toast("All fields are mandatory")
        }
-      }).catch("error")
+      }).catch((e)=>console.log("error",e))
  
 
     
@@ -451,7 +365,7 @@ useEffect(()=>{
      ,commentpayload
      ).then((response)=>{
       console.log("")
-     }).catch("error")
+     }).catch((e)=>console.log("error",e))
      
      axios.put(`http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=${localEmail}&type=employee`,selfAspirationpayload)
      .then((response)=>{console.log("");}).catch("error")
@@ -503,7 +417,7 @@ useEffect(()=>{
     }else{
       delete errors['selfRating1'];
     }
-    if(name === 'selfComment1' && !formData.selfRating1){
+    if(name === 'selfComment1' && !formData.selfComment1){
       formIsValid = false;
       errors['selfComment1'] = 'Please enter comments';
     }else{
@@ -515,7 +429,7 @@ useEffect(()=>{
     }else{
       delete errors['selfRating2'];
     }
-    if(name === 'selfComment2' && !formData.selfComment1){
+    if(name === 'selfComment2' && !formData.selfComment2){
       formIsValid = false;
       errors['selfComment2'] = 'Please enter comments';
     }else{
@@ -539,7 +453,7 @@ useEffect(()=>{
     }else{
       delete errors['selfRating4'];
     }
-    if(name === 'selfComment4' && !formData.selfRating4){
+    if(name === 'selfComment4' && !formData.selfComment4){
       formIsValid = false;
       errors['selfComment4'] = 'Please enter comments';
     }else{
@@ -551,7 +465,7 @@ useEffect(()=>{
     }else{
       delete errors['selfRating5'];
     }
-    if(name === 'selfComment5' && !formData.selfRating5){
+    if(name === 'selfComment5' && !formData.selfComment5){
       formIsValid = false;
       errors['selfComment5'] = 'Please enter comments';
     }else{
@@ -910,7 +824,7 @@ return (
 
                                </Stack>
                         </Stack>
-               {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px",marginTop:"-30px",color: "red" }}>{formErrors.selfComment1}</Grid>}
+               {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px",marginTop:"20px",color: "red" }}>{formErrors.selfComment1}</Grid>}
    
                 </Grid>
                 <Grid>
@@ -964,7 +878,7 @@ return (
                                </Stack>
 
                         </Stack>
-                              {formErrors.selfComment2 && !formData.selfComment2 && <Grid sx={{ marginLeft: "700px", marginTop: "-25px", color: "red" }}>{formErrors.selfComment2}</Grid>}
+                              {formErrors.selfComment2 && !formData.selfComment2 && <Grid sx={{ marginLeft: "700px", marginTop: "20px", color: "red" }}>{formErrors.selfComment2}</Grid>}
                 </Grid>
                 <Grid>
                         <Stack style={{marginTop:'40px'}}> 
@@ -1015,7 +929,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment1 && !formData.selfComment1 && <Grid sx={{ marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment1}</Grid>}
+                        {formErrors.selfComment3 && !formData.selfComment3 && <Grid sx={{ marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment3}</Grid>}
   
                 </Grid>
                 <Grid>
@@ -1080,7 +994,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment4 && !formData.selfComment4 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment4}</Grid>}
+                        {formErrors.selfComment4 && !formData.selfComment4 && <Grid sx={{  marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment4}</Grid>}
 
                     
                 </Grid>
@@ -1131,7 +1045,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment5 && !formData.selfComment5 && <Grid sx={{ marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment5}</Grid>}
+                        {formErrors.selfComment5 && !formData.selfComment5 && <Grid sx={{ marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment5}</Grid>}
 
                     
                 </Grid>
@@ -1183,7 +1097,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment6 && !formData.selfComment6 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment6}</Grid>}
+                        {formErrors.selfComment6 && !formData.selfComment6 && <Grid sx={{  marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment6}</Grid>}
 
                     
                 </Grid>
@@ -1235,7 +1149,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment7 && !formData.selfComment7 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment7}</Grid>}
+                        {formErrors.selfComment7 && !formData.selfComment7 && <Grid sx={{  marginLeft: "700px", marginTop: "-20px", color: "red" }}>{formErrors.selfComment7}</Grid>}
 
                     
                 </Grid>
@@ -1288,7 +1202,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment8 && !formData.selfComment8 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment8}</Grid>}
+                        {formErrors.selfComment8 && !formData.selfComment8 && <Grid sx={{  marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment8}</Grid>}
 
                     
                 </Grid>
@@ -1340,7 +1254,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment9 && !formData.selfComment9 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment9}</Grid>}
+                        {formErrors.selfComment9 && !formData.selfComment9 && <Grid sx={{  marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment9}</Grid>}
 
                     
                 </Grid>
@@ -1394,7 +1308,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment10 && !formData.selfComment10 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment10}</Grid>}
+                        {formErrors.selfComment10 && !formData.selfComment10 && <Grid sx={{  marginLeft: "700px", marginTop: "10px", color: "red" }}>{formErrors.selfComment10}</Grid>}
 
                       
                 </Grid>
@@ -1447,7 +1361,7 @@ return (
                              
                                </Stack>
                         </Stack>
-                        {formErrors.selfComment11 && !formData.selfComment11 && <Grid sx={{  marginLeft: "700px", marginTop: "-30px", color: "red" }}>{formErrors.selfComment11}</Grid>}
+                        {formErrors.selfComment11 && !formData.selfComment11 && <Grid sx={{  marginLeft: "700px", marginTop: "5px", color: "red" }}>{formErrors.selfComment11}</Grid>}
 
                 </Grid>
 <Divider  sx={{ width: '100%' ,marginTop:'20px'}} />

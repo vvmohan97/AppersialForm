@@ -45,6 +45,23 @@ const [popmsg,setPopmsg]=useState(false)
   const [list, setList] = useState()
   const [feedback, setFeedback] = useState();
   const [post, setPost] = useState(null)
+  //validation Starts here
+  const [formData,setFormData]=useState({
+   
+  managerRating1:0,
+  managerRating2:0,
+  managerRating3:0,
+  managerRating4:0,
+  managerRating5:0,
+  managerRating6:0,
+  managerRating7:0,
+  managerRating8:0,
+  managerRating9:0,
+  managerRating10:0,
+managerRating11:0,
+    managerFedback:"",
+  
+  })
   // manager comment starts here
   const [managerRating1, setManagerRating1] = useState(0);
   const [managerRating2, setManagerRating2] = useState(0);
@@ -71,63 +88,227 @@ const [popmsg,setPopmsg]=useState(false)
   const [managerComment10, setManagerComment10] = useState();
   const [managerComment11, setManagerComment11] = useState();
 
+  const handleInputChange=(e)=>{
+    const {name,value} = e.target;
+     
+    setFormData({
+      ...formData,
+      [name]:value,
+    });
+  }
+  const handleInputBlur = (e)=>{
+    const {name} = e.target;
+    let errors = {...formErrors};
+    let formIsValid = true;
+
+    
+
+       if(name === 'managerRating1' && !formData.managerRating1){
+      formIsValid = false;
+      errors['managerRating1'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating1'];
+    }
+    if(name === 'managerComment1' && !formData.managerComment1){
+      formIsValid = false;
+      errors['managerComment1'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment1'];
+    }
+    if(name === 'managerRating2' && !formData.managerRating2){
+      formIsValid = false;
+      errors['managerRating2'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating2'];
+    }
+    if(name === 'managerComment2' && !formData.managerComment2){
+      formIsValid = false;
+      errors['managerComment2'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment2'];
+    }
+    if(name === 'managerRating3' && !formData.managerRating3){
+      formIsValid = false;
+      errors['managerRating3'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating3'];
+    }
+    if(name === 'managerComment3' && !formData.managerComment3){
+      formIsValid = false;
+      errors['managerComment3'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment3'];
+    }
+    if(name === 'managerRating4' && !formData.managerRating4){
+      formIsValid = false;
+      errors['managerRating4'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating4'];
+    }
+    if(name === 'managerComment4' && !formData.managerComment4){
+      formIsValid = false;
+      errors['managerComment4'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment4'];
+    }
+    if(name === 'managerRating5' && !formData.managerRating5){
+      formIsValid = false;
+      errors['managerRating5'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating5'];
+    }
+    if(name === 'managerComment5' && !formData.managerComment5){
+      formIsValid = false;
+      errors['managerComment5'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment5'];
+    }
+    if(name === 'managerRating6' && !formData.managerRating6){
+      formIsValid = false;
+      errors['managerRating6'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating6'];
+    }
+    if(name === 'managerComment6' && !formData.managerRating6){
+      formIsValid = false;
+      errors['managerComment6'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment6'];
+    }
+    if(name === 'managerRating7' && !formData.managerRating7){
+      formIsValid = false;
+      errors['managerRating7'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating7'];
+    }
+    if(name === 'managerComment7' && !formData.managerComment7){
+      formIsValid = false;
+      errors['managerComment7'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment7'];
+    }
+    if(name === 'managerRating8' && !formData.managerRating8){
+      formIsValid = false;
+      errors['managerRating8'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating8'];
+    }
+    if(name === 'managerComment8' && !formData.managerRating8){
+      formIsValid = false;
+      errors['managerComment8'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment8'];
+    }
+    if(name === 'managerRating9' && !formData.managerRating9){
+      formIsValid = false;
+      errors['managerRating9'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating9'];
+    }
+    if(name === 'managerComment9' && !formData.managerComment9){
+      formIsValid = false;
+      errors['managerComment9'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment9'];
+    }
+    if(name === 'managerRating10' && !formData.managerRating10){
+      formIsValid = false;
+      errors['managerRating10'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating10'];
+    }
+    if(name === 'managerComment10' && !formData.managerComment10){
+      formIsValid = false;
+      errors['managerComment10'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment10'];
+    }
+    if(name === 'managerRating11' && !formData.managerRating11){
+      formIsValid = false;
+      errors['managerRating11'] = 'Please select Rating';
+    }else{
+      delete errors['managerRating11'];
+    }
+    if(name === 'managerComment11' && !formData.managerComment11){
+      formIsValid = false;
+      errors['managerComment11'] = 'Please enter comments';
+    }else{
+      delete errors['managerComment11'];
+    }
+    if(name === 'managerfeedback' && !formData.managerfeedback){
+      formIsValid = false;
+      errors['managerfeedback'] = 'Please enter comments';
+    }else{
+      delete errors['managerfeedback'];
+    }
+  }
+
+  const [formErrors,setFormErrors]=useState({
+    name:"",
+    designation:"",
+    department:"",
+    managerName:"",
+    
+    selfaspiration:"",
+  })
+
   const commentpayload = [
     {
       t_id: 1,
-      manager_rating: managerRating1,
-      manager_comment: managerComment1
+      manager_rating: formData.managerRating1,
+      manager_comment: formData.managerComment1
     },
     {
       t_id: 2,
-      manager_rating: managerRating2,
-      manager_comment: managerComment2
+      manager_rating: formData.managerRating2,
+      manager_comment: formData.managerComment2
     },
     {
       t_id: 3,
-      manager_rating: managerRating3,
-      manager_comment: managerComment3
+      manager_rating: formData.managerRating3,
+      manager_comment: formData.managerComment3
     },
     {
       t_id: 4,
-      manager_rating: managerRating4,
-      manager_comment: managerComment4
+      manager_rating: formData.managerRating4,
+      manager_comment: formData.managerComment4
     },
     {
       t_id: 5,
-      manager_rating: managerRating5,
-      manager_comment: managerComment5
+      manager_rating: formData.managerRating5,
+      manager_comment: formData.managerComment5
     },
     {
       t_id: 6,
-      manager_rating: managerRating6,
-      manager_comment: managerComment6
+      manager_rating: formData.managerRating6,
+      manager_comment: formData.managerComment6
     },
 
     {
       t_id: 7,
-      manager_rating: managerRating7,
-      manager_comment: managerComment7
+      manager_rating: formData.managerRating7,
+      manager_comment: formData.managerComment7
     },
 
     {
       t_id: 8,
-      manager_rating: managerRating8,
-      manager_comment: managerComment8
+      manager_rating: formData.managerRating8,
+      manager_comment: formData.managerComment8
     },
     {
       t_id: 9,
-      manager_rating: managerRating9,
-      manager_comment: managerComment9
+      manager_rating: formData.managerRating9,
+      manager_comment: formData.managerComment9
     },
     {
       t_id: 10,
-      manager_rating: managerRating10,
-      manager_comment: managerComment10
+      manager_rating: formData.managerRating10,
+      manager_comment: formData.managerComment10
     },
     {
       t_id: 11,
-      manager_rating: managerRating11,
-      manager_comment: managerComment11
+      manager_rating: formData.managerRating11,
+      manager_comment: formData.managerComment11
     },
 
   ]
@@ -137,22 +318,22 @@ const [popmsg,setPopmsg]=useState(false)
 
 
 
-  const self_aspiration = {
-    self_aspiration: "selfaspiration"
+  const managerFeedback = {
+    manager_feedback: formData.managerFedback
 
   }
   const selectedemail = localStorage.getItem("selected")
 
   useEffect(() => {
 
-    let total = (parseInt(managerRating1) + parseInt(managerRating2) + parseInt(managerRating3) + parseInt(managerRating4) + parseInt(managerRating5) +
-      parseInt(managerRating6) + parseInt(managerRating7) + parseInt(managerRating8) + parseInt(managerRating9) + parseInt(managerRating10) + parseInt(managerRating11))
+    let total = (parseInt(formData.managerRating1) + parseInt(formData.managerRating2) + parseInt(formData.managerRating3) + parseInt(formData.managerRating4) + parseInt(formData.managerRating5) +
+      parseInt(formData.managerRating6) + parseInt(formData.managerRating7) + parseInt(formData.managerRating8) + parseInt(formData.managerRating9) + parseInt(formData.managerRating10) + parseInt(formData.managerRating11))
     console.log(typeof (parseFloat(total)), "par");
     console.log(total, "tot");
     let avg = total / 11;
     console.log(avg, "avg");
     setAverage(avg.toFixed(2))
-  }, [managerRating1, managerRating2, managerRating3, managerRating4, managerRating5, managerRating6, managerRating7, managerRating8, managerRating9, managerRating10, managerRating11])
+  }, [formData.managerRating1, formData.managerRating2, formData.managerRating3, formData.managerRating4, formData.managerRating5, formData.managerRating6, formData.managerRating7, formData.managerRating8, formData.managerRating9, formData.managerRating10, formData.managerRating11])
   // console.log(average,"avg");
   // console.log(managerRating1,"///");
   useEffect(() => {
@@ -214,39 +395,113 @@ const [popmsg,setPopmsg]=useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const errors = {};
-    if (!name) {
-      errors.name = "*Requried"
+    let formIsValid = true;
 
+   
+       if(!formData.managerRating1){
+      formIsValid=false;
+      errors['managerRating1']="Please select Rating"
     }
-    if (!designation) {
-      errors.designation = "*Requried";
+    if(!formData.managerComment1){
+      formIsValid=false;
+      errors['managerComment1']="Please enter comments"
     }
+    if(!formData.managerRating2){
+      formIsValid=false;
+      errors['managerRating2']="Please select Rating"
+    }
+    if(!formData.managerComment2){
+      formIsValid=false;
+      errors['managerComment2']="Please enter comments"
+    }
+    if(!formData.managerRating3){
+      formIsValid=false;
+      errors['managerRating3']="Please select Rating"
+    }
+    if(!formData.managerComment3){
+      formIsValid=false;
+      errors['managerComment3']="Please enter comments"
+    }
+    if(!formData.managerRating4){
+      formIsValid=false;
+      errors['managerRating4']="Please select Rating"
+    }
+    if(!formData.managerComment4){
+      formIsValid=false;
+      errors['managerComment4']="Please enter comments"
+    }
+    if(!formData.managerRating5){
+      formIsValid=false;
+      errors['managerRating5']="Please select Rating"
+    }
+    if(!formData.managerComment5){
+      formIsValid=false;
+      errors['managerComment5']="Please enter comments"
+    }
+    if(!formData.managerRating6){
+      formIsValid=false;
+      errors['managerRating6']="Please select Rating"
+    }
+    if(!formData.managerComment6){
+      formIsValid=false;
+      errors['managerComment6']="Please enter comments"
+    }
+    if(!formData.managerRating7){
+      formIsValid=false;
+      errors['managerRating7']="Please select Rating"
+    }
+    if(!formData.managerComment7){
+      formIsValid=false;
+      errors['managerComment7']="Please enter comments"
+    }
+    if(!formData.managerRating8){
+      formIsValid=false;
+      errors['managerRating8']="Please select Rating"
+    }
+    if(!formData.managerComment8){
+      formIsValid=false;
+      errors['managerComment8']="Please enter comments"
+    }
+    if(!formData.managerRating9){
+      formIsValid=false;
+      errors['managerRating9']="Please select Rating"
+    }
+    if(!formData.managerComment9){
+      formIsValid=false;
+      errors['managerComment9']="Please enter comments"
+    }
+    if(!formData.managerRating10){
+      formIsValid=false;
+      errors['managerRating10']="Please select Rating"
+    }
+    if(!formData.managerComment10){
+      formIsValid=false;
+      errors['managerComment10']="Please enter comments"
+    }
+    if(!formData.managerRating11){
+      formIsValid=false;
+      errors['managerRating11']="Please select Rating"
+    }
+    if(!formData.managerComment11){
+      formIsValid=false;
+      errors['managerComment11']="Please enter comments"
+    }
+    if(!formData.managerfeedback){
+      formIsValid=false;
+      errors['managerfeedback']="please enter comments"
+    }
+   
 
-    if (!joining) {
-      errors.joining = "*Requried";
-    }
-    if (!department) {
-      errors.department = "*Requried"
-    }
-    if (!manager) {
-      errors.manager = '*Requried'
-    }
-    if (!justifyrating) {
-      errors.justifyrating = "*Requried"
-    }
-    if (!selfrating) {
-      errors.selfrating = "*Requried"
-    }
-    if (!selfaspiration) {
-      errors.selfaspiration = "*Requried"
-    }
-    if (!teamlead) {
-      errors.teamlead = "*Requried"
-    }
+    setFormErrors(errors);
 
 
-    setErrors(errors);
+    
+  
+
+  
+  
     axios.post(`http://demo.emeetify.com:5052/appraisel/users/AddComment?email=${selectedemail}&&type=manager`,
       commentpayload
 
@@ -263,11 +518,11 @@ const [popmsg,setPopmsg]=useState(false)
     })
       .catch("error")
 
-    axios.post(`http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=${selectedemail}&type=employee`
-      , { self_aspiration }
-    ).then((response) => {
-      console.log(response.data)
-    }).catch("error")
+    // axios.post(`http://demo.emeetify.com:5052/appraisel/users/userFeedback?email=${selectedemail}&type=manager`
+    //   , { managerFeedback }
+    // ).then((response) => {
+    //   console.log(response.data)
+    // }).catch("error")
 
   }
 
@@ -475,7 +730,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
 
                         <Select name='self_Rating'
@@ -491,7 +746,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                       
                         </Stack>
                         <TextField name='selfComment1'
                           value={list[0]?.comments[0]?.self_comment}
@@ -505,11 +760,11 @@ const [popmsg,setPopmsg]=useState(false)
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
 
-                        <Select
-                          onChange={(e) => {
-                            setManagerRating1(e.target.value)
-                            console.log(e.target.value, "vvv")
-                          }}
+                        <Select 
+                         name="managerRating1"
+                         value={formData.managerRating1}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -517,15 +772,25 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating1 && !formData.managerRating1 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating1}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment1(e.target.value) }}></TextField>
+                        <TextField  
+                        name="managerComment1"
+                        value={formData.managerComment1}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}
+                         ></TextField>
                       </Stack>
+
                     </Stack>
+                    {formErrors.managerComment1 && !formData.managerComment1 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment1}</Grid>}
+
 
                   </Grid>
                   <Grid>
@@ -545,7 +810,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
 
                         <Select
@@ -562,7 +827,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
                         <TextField value={list[0]?.comments[1]?.self_comment}></TextField>
                       </Stack>
@@ -575,7 +840,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating2(e.target.value) }}
+                             name="managerRating2"
+                             value={formData.managerRating2}
+                             onChange={handleInputChange}
+                             onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -583,15 +851,22 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating2 && !formData.managerRating2 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating2}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment2(e.target.value) }}></TextField>
+                        <TextField 
+                              name="managerComment2"
+                              value={formData.managerComment2}
+                               onChange={handleInputChange}
+                               onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment2&& !formData.managerComment2 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment2}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -609,7 +884,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
 
                         <Select
@@ -626,7 +901,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
                         <TextField value={list[0]?.comments[2]?.self_comment} ></TextField>
                       </Stack>
@@ -639,7 +914,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating3(e.target.value) }}
+                         name="managerRating3"
+                         value={formData.managerRating3}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -647,15 +925,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating3 && !formData.managerRating3 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating3}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment3(e.target.value) }}></TextField>
+                        <TextField       name="managerComment3"
+                        value={formData.managerComment3}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment3 && !formData.managerComment3 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment3}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -686,7 +970,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
 
                         <Select
@@ -703,7 +987,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
                         <TextField value={list[0]?.comments[3]?.self_comment} ></TextField>
                       </Stack>
@@ -716,7 +1000,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating4(e.target.value) }}
+                             name="managerRating4"
+                             value={formData.managerRating4}
+                             onChange={handleInputChange}
+                             onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -724,15 +1011,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating4 && !formData.managerRating4 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating4}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment4(e.target.value) }}></TextField>
+                        <TextField       name="managerComment4"
+                        value={formData.managerComment4}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment4 && !formData.managerComment4 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment4}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -748,7 +1041,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
 
                         <Select
@@ -765,7 +1058,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                     
                         </Stack>
                         <TextField value={list[0]?.comments[4]?.self_comment}></TextField>
                       </Stack>
@@ -778,7 +1071,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating5(e.target.value) }}
+                          name="managerRating5"
+                          value={formData.managerRating5}
+                          onChange={handleInputChange}
+                          onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -786,15 +1082,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating5 && !formData.managerRating5 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating5}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment5(e.target.value) }}></TextField>
+                        <TextField       name="managerComment5"
+                        value={formData.managerComment5}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment5 && !formData.managerComment5 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment5}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -811,7 +1113,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                       
                         </Stack>
 
                         <Select
@@ -828,7 +1130,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
                         <TextField value={list[0]?.comments[5]?.self_comment} ></TextField>
                       </Stack>
@@ -841,7 +1143,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating6(e.target.value) }}
+                             name="managerRating6"
+                             value={formData.managerRating6}
+                             onChange={handleInputChange}
+                             onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -849,15 +1154,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating6 && !formData.managerRating6 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating6}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment6(e.target.value) }}></TextField>
+                        <TextField       name="managerComment6"
+                        value={formData.managerComment6}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment6 && !formData.managerComment6 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment6}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -874,7 +1185,6 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
 
                         <Select
@@ -900,11 +1210,13 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating7(e.target.value) }}
+                            name="managerRating7"
+                            value={formData.managerRating7}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -912,15 +1224,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating7 && !formData.managerRating7 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating7}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment7(e.target.value) }}></TextField>
+                        <TextField       name="managerComment7"
+                        value={formData.managerComment7}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment7 && !formData.managerComment7 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment7}</Grid>}
 
                   </Grid>
 
@@ -938,7 +1256,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                       
                         </Stack>
 
                         <Select
@@ -955,7 +1273,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
                         <TextField value={list[0]?.comments[7]?.self_comment} ></TextField>
                       </Stack>
@@ -968,7 +1286,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating8(e.target.value) }}
+                            name="managerRating8"
+                            value={formData.managerRating8}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -976,15 +1297,22 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating8 && !formData.managerRating8 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating8}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment8(e.target.value) }}></TextField>
+                        <TextField 
+                              name="managerComment8"
+                              value={formData.managerComment8}
+                               onChange={handleInputChange}
+                               onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment8 && !formData.managerComment8 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment8}</Grid>}
 
                   </Grid>
                   <Grid>
@@ -1001,7 +1329,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
 
                         <Select
@@ -1018,7 +1346,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
                         <TextField value={list[0]?.comments[8]?.self_comment}
                         ></TextField>
@@ -1032,7 +1360,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating9(e.target.value) }}
+                           name="managerRating9"
+                           value={formData.managerRating9}
+                           onChange={handleInputChange}
+                           onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -1040,15 +1371,22 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating9 && !formData.managerRating9 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating9}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment9(e.target.value) }}></TextField>
+                        <TextField       name="managerComment9"
+                        value={formData.managerComment9}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment9 && !formData.managerComment9 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment9}</Grid>}
+
                   </Grid>
 
                   <Grid>
@@ -1063,7 +1401,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                        
                         </Stack>
 
                         <Select
@@ -1081,7 +1419,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                        
                         </Stack>
                         <TextField value={list[0]?.comments[9]?.self_comment}></TextField>
                       </Stack>
@@ -1094,7 +1432,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating10(e.target.value) }}
+                             name="managerRating10"
+                             value={formData.managerRating10}
+                             onChange={handleInputChange}
+                             onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -1102,15 +1443,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating10 && !formData.managerRating10 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating10}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment10(e.target.value) }}></TextField>
+                        <TextField       name="managerComment10"
+                        value={formData.managerComment10}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment10 && !formData.managerComment10 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment10}</Grid>}
 
                   </Grid>
 
@@ -1128,7 +1475,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '220px' }}>
                         <Stack direction='row'>
                           <InputLabel>Self Rating</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                         
                         </Stack>
 
                         <Select
@@ -1145,7 +1492,7 @@ const [popmsg,setPopmsg]=useState(false)
                       <Stack style={{ marginLeft: '300px' }}>
                         <Stack direction='row'>
                           <InputLabel>Justify Your Comment</InputLabel>
-                          <InputLabel style={{ color: 'red' }}>*</InputLabel>
+                          
                         </Stack>
                         <TextField value={list[0]?.comments[10]?.self_comment}></TextField>
                       </Stack>
@@ -1158,7 +1505,10 @@ const [popmsg,setPopmsg]=useState(false)
                         </Stack>
 
                         <Select
-                          onChange={(e) => { setManagerRating11(e.target.value) }}
+                           name="managerRating11"
+                           value={formData.managerRating11}
+                           onChange={handleInputChange}
+                           onBlur={handleInputBlur}
                         >
                           <MenuItem key={5} value="5">5</MenuItem>
                           <MenuItem key={4} value="4">4</MenuItem>
@@ -1166,15 +1516,21 @@ const [popmsg,setPopmsg]=useState(false)
                           <MenuItem key={2} value="2">2</MenuItem>
                           <MenuItem key={1} value="1">1</MenuItem>
                         </Select>
+                        {formErrors.managerRating11 && !formData.managerRating11 && <Grid sx={{ marginLeft: "-10px", marginTop: "10px", color: "red" }}>{formErrors.managerRating11}</Grid>}
+
                       </Stack>
                       <Stack style={{ marginLeft: '260px' }}>
                         <Stack direction='row'>
                           <InputLabel>Manager Comment</InputLabel>
                           <InputLabel style={{ color: 'red' }}>*</InputLabel>
                         </Stack>
-                        <TextField onChange={(e) => { setManagerComment11(e.target.value) }}></TextField>
+                        <TextField       name="managerComment11"
+                        value={formData.managerComment11}
+                         onChange={handleInputChange}
+                         onBlur={handleInputBlur}></TextField>
                       </Stack>
                     </Stack>
+                    {formErrors.managerComment11 && !formData.managerComment11 && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerComment11}</Grid>}
 
                   </Grid>
 
@@ -1205,8 +1561,14 @@ const [popmsg,setPopmsg]=useState(false)
                     </Grid>
                     <Grid item xs={4} sx={{ marginLeft: "100px" }}>
                       <Typography sx={{ fontSize: '20px' }}>Manager's Feedback<span style={{ color: 'red' }}>*</span></Typography>
-                      <TextareaAutosize minRows={4}  ></TextareaAutosize>
+                      <TextareaAutosize minRows={4} value={formData.managerfeedback}
+                      onChange={handleInputChange}
+                      onBlur={handleInputBlur}
+                      name="managerfeedback"
+                      ></TextareaAutosize>
                     </Grid>
+                    {formErrors.managerfeedback && !formData.managerfeedback && <Grid sx={{ marginLeft: "650px", marginTop: "5px", color: "red" }}>{formErrors.managerfeedback}</Grid>}
+
                   </Grid>
 
 
